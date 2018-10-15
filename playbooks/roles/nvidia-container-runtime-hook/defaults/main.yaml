@@ -1,0 +1,3 @@
+nvidia_container_hook_repo_base_url: 'https://nvidia.github.io/'
+libnvidia_container_suffix: 'libnvidia-container/centos7/$basearch' 
+nvidia_container_runtime_suffix: 'nvidia-container-runtime/centos7/$basearch'

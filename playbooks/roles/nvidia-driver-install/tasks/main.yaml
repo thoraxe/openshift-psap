@@ -6,8 +6,15 @@
 - name: install EPEL
   yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=present
 
-- name: install NVIDIA repo
-  yum: name=https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-9.1.85-1.x86_64.rpm state=present
+- name: cuda NVIDIA repository
+  yum_repository:
+    name: cuda
+    description: cuda
+    baseurl: '{{ cuda_driver_repo_base_url }}{{ cuda_driver_repo_suffix }}'
+    enabled: 1
+    gpgcheck: 1
+    gpgkey: http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/7fa2af80.pub
+    state: present
 
 - name: install NVIDIA drivers
   yum:  name={{item}} state=present

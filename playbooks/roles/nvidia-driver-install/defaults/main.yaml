@@ -1,0 +1,2 @@
+cuda_driver_repo_base_url: 'http://developer.download.nvidia.com/' 
+cuda_driver_repo_suffix: 'compute/cuda/repos/rhel7/x86_64'

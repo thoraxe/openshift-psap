@@ -1,6 +1,29 @@
 ---
-- name: install NVIDIA repo for container runtime hook
-  shell: yum-config-manager --add-repo=https://nvidia.github.io/nvidia-container-runtime/centos7/x86_64/nvidia-container-runtime.repo
+- name: libnvidia-container repo
+  yum_repository:
+    name: libnvidia-container
+    description: libnvidia-container
+    baseurl: '{{ nvidia_container_hook_repo_base_url }}{{ libnvidia_container_suffix }}'
+    repo_gpgcheck: true
+    gpgcheck: false
+    enabled: 1
+    gpgkey: https://nvidia.github.io/libnvidia-container/gpgkey
+    sslverify: 1
+    sslcacert: /etc/pki/tls/certs/ca-bundle.crt
+    state: present
+
+- name: nvidia-container-runtime repo
+  yum_repository:
+    name: nvidia-container-runtime
+    description: nvidia-container-runtime
+    baseurl: '{{ nvidia_container_hook_repo_base_url }}{{ nvidia_container_runtime_suffix }}'
+    repo_gpgcheck: true
+    gpgcheck: false
+    enabled: 1
+    gpgkey: https://nvidia.github.io/nvidia-container-runtime/gpgkey
+    sslverify: 1
+    sslcacert: /etc/pki/tls/certs/ca-bundle.crt
+    state: present
 
 - name: install nvidia-container-runtime-hook
   yum: name=nvidia-container-runtime-hook state=latest
