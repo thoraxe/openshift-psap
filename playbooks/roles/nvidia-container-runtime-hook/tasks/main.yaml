@@ -4,8 +4,8 @@
     name: libnvidia-container
     description: libnvidia-container
     baseurl: '{{ nvidia_container_hook_repo_base_url }}{{ libnvidia_container_suffix }}'
-    repo_gpgcheck: {{ libnvidia_container_repo_gpgcheck }}
-    gpgcheck: {{ libnvidia_container_gpgcheck }}
+    repo_gpgcheck: '{{ libnvidia_container_repo_gpgcheck }}'
+    gpgcheck: '{{ libnvidia_container_gpgcheck }}'
     enabled: 1
     gpgkey: https://nvidia.github.io/libnvidia-container/gpgkey
     sslverify: 1
@@ -17,8 +17,8 @@
     name: nvidia-container-runtime
     description: nvidia-container-runtime
     baseurl: '{{ nvidia_container_hook_repo_base_url }}{{ nvidia_container_runtime_suffix }}'
-    repo_gpgcheck: {{ nvidia_container_runtime_repo_gpgcheck }}
-    gpgcheck: {{ nvidia_container_runtime_gpgcheck }}
+    repo_gpgcheck: '{{ nvidia_container_runtime_repo_gpgcheck }}'
+    gpgcheck: '{{ nvidia_container_runtime_gpgcheck }}'
     enabled: 1
     gpgkey: https://nvidia.github.io/nvidia-container-runtime/gpgkey
     sslverify: 1
