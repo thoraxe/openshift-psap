@@ -1,3 +1,7 @@
 nvidia_container_hook_repo_base_url: 'https://nvidia.github.io/'
 libnvidia_container_suffix: 'libnvidia-container/centos7/$basearch' 
+libnvidia_container_repo_gpgcheck: true
+libnvidia_container_gpgcheck: false
 nvidia_container_runtime_suffix: 'nvidia-container-runtime/centos7/$basearch'
+nvidia_container_runtime_repo_gpgcheck: true
+nvidia_container_runtime_gpgcheck: false
