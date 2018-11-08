@@ -6,10 +6,14 @@ items:
   kind: Service
   metadata:
     name: caffe2
+    labels:
+      app: caffe2
   spec:
     ports:
-    - port: 80
+    - name: caffe2
+      port: 80
       targetPort: 8888
+      protocol: TCP
     selector:
       app: caffe2
 - apiVersion: v1
