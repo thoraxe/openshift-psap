@@ -27,6 +27,7 @@
    - nvidia-driver-devel
    - nvidia-driver-cuda
    - nvidia-modprobe
+   - cuda-drivers
 
 - name: load NVIDIA and unified memory kernel modules
   shell: nvidia-modprobe && nvidia-modprobe -u
