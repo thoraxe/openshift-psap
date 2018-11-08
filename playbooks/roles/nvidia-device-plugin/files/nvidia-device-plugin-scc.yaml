@@ -35,5 +35,6 @@ supplementalGroups:
   type: RunAsAny
 users:
 - system:serviceaccount:nvidia-device-plugin:nvidia-deviceplugin
+- system:serviceaccount:kube-system:nvidia-deviceplugin
 volumes:
 - '*' 

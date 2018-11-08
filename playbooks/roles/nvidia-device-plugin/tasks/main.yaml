@@ -16,13 +16,22 @@
   command: oc patch namespace nvidia-device-plugin -p '{"metadata":{"annotations":{"openshift.io/node-selector":""}}}'
   when: "'openshift.io/node-selector: \"\"' not in nvidia_project_yaml.stdout"
 
-- name: check for nvidia device plugin service account
+- name: check for nvidia device plugin service account in kube-system project
   command: oc get serviceaccount nvidia-deviceplugin -n kube-system
   register: deviceplugin_out
   ignore_errors: true
 
-- name: create serviceaccount for nvidia deviceplugin
+- name: create serviceaccount for nvidia deviceplugin in kube-system project
   command: oc create serviceaccount -n kube-system nvidia-deviceplugin
+  when: deviceplugin_out is failed
+
+- name: check for nvidia device plugin service account in nvidia-device-plugin project
+  command: oc get serviceaccount nvidia-deviceplugin -n nvidia-device-plugin
+  register: deviceplugin_out
+  ignore_errors: true
+
+- name: create serviceaccount for nvidia deviceplugin in kube-system project
+  command: oc create serviceaccount -n nvidia-device-plugin nvidia-deviceplugin
   when: deviceplugin_out is failed
 
 - name: copy device plugin scc yaml to host
