@@ -17,12 +17,12 @@
   when: "'openshift.io/node-selector: \"\"' not in nvidia_project_yaml.stdout"
 
 - name: check for nvidia device plugin service account
-  command: oc get serviceaccount nvidia-deviceplugin -n nvidia-device-plugin
+  command: oc get serviceaccount nvidia-deviceplugin -n kube-system
   register: deviceplugin_out
   ignore_errors: true
 
 - name: create serviceaccount for nvidia deviceplugin
-  command: oc create serviceaccount -n nvidia-device-plugin nvidia-deviceplugin
+  command: oc create serviceaccount -n kube-system nvidia-deviceplugin
   when: deviceplugin_out is failed
 
 - name: copy device plugin scc yaml to host
@@ -36,7 +36,7 @@
   ignore_errors: true
 
 - name: load nvidia device plugin scc
-  command: oc create -f /tmp/nvidia-device-plugin-scc.yaml -n nvidia-device-plugin
+  command: oc create -f /tmp/nvidia-device-plugin-scc.yaml 
   when: deviceplugin_scc_out is failed
 
 # need to supply an env var called 'gpu_hosts' that refers to the group of hosts/nodes where we should apply the gpu label
@@ -50,10 +50,10 @@
     dest: /tmp/nvidia-device-plugin-daemonset.yaml
 
 - name: check for nvidia device plugin daemonset
-  command: oc get daemonset -n nvidia-device-plugin nvidia-deviceplugin-daemonset
+  command: oc get daemonset -n kube-system nvidia-deviceplugin-daemonset
   register: daemonset_out
   ignore_errors: true
 
 - name: install the NVIDIA kubernetes device-plugin (CentOS base image)
-  command: oc create -f /tmp/nvidia-device-plugin-daemonset.yaml -n nvidia-device-plugin
+  command: oc create -f /tmp/nvidia-device-plugin-daemonset.yaml -n kube-system
   when: daemonset_out is failed
